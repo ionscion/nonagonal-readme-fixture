@@ -1,5 +1,5 @@
-// TODO: Include packages needed for this application
 const inquirer = require("inquirer");
+const fs = require("fs");
 // WHEN I enter my project title
 // THEN this is displayed as the title of the README
 // WHEN I enter a description, installation instructions, usage information, contribution guidelines, and test instructions
@@ -67,6 +67,11 @@ function init() {
       },
       {
         type: "input",
+        name: "name",
+        message: "What is your name?",
+      },
+      {
+        type: "input",
         name: "username",
         message: "What is your Github username?",
       },
@@ -91,9 +96,48 @@ function init() {
           email: answers.email,
         },
       };
-
+      const readmeContents = `
+      # ${readmeData.title}
+      
+      ## Description
+      
+      ${readmeData.description}
+      
+      ## Installation
+      
+      ${readmeData.installation}
+      
+      ## Usage
+      
+      ${readmeData.usage}
+      
+      ## Contributing
+      
+      ${readmeData.contribution}
+      
+      ## Tests
+      
+      ${readmeData.test}
+      
+      ## License
+      
+      ${readmeData.license}
+      
+      ## Questions
+      
+      For questions, please contact ${readmeData.author.name} at ${readmeData.author.email} or visit their [GitHub profile](https://github.com/${readmeData.author.username}).
+      
+      `.replace(/^\s+/gm, '');
+      fs.writeFile("README.md", readmeContents,{ encoding: "utf8", flag: "w", mode: 0o666, filetype: "markdown" }, (err) => {
+        if (err) {
+          console.error(err);
+        } else {
+          console.log("README.md created successfully!");
+        }
+      });
       console.log("Generated README data:", readmeData);
     })
+    
     .catch((error) => {
       console.log("There was an error:", error);
     });
