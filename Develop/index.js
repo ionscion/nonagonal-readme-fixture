@@ -23,7 +23,15 @@ const questions = [
 ];
 
 // TODO: Create a function to write README file
-function writeToFile(fileName, data) {}
+function writeToFile(data) {
+  fs.writeFile("README.md", data,{ encoding: "utf8", flag: "w", mode: 0o666, filetype: "markdown" }, (err) => {
+    if (err) {
+      console.error(err);
+    } else {
+      console.log("README.md created successfully!");
+    }
+  });
+}
 
 // TODO: Create a function to initialize app
 function init() {
@@ -102,6 +110,14 @@ function init() {
       ## Description
       
       ${readmeData.description}
+
+      ## Table of Contents
+      - [Installation](#installation)
+      - [Usage](#usage)
+      - [Contributing](#contributing)
+      - [Tests](#tests)
+      - [License](#license)
+      - [Questions](#questions)
       
       ## Installation
       
@@ -128,16 +144,9 @@ function init() {
       For questions, please contact ${readmeData.author.name} at ${readmeData.author.email} or visit their [GitHub profile](https://github.com/${readmeData.author.username}).
       
       `.replace(/^\s+/gm, '');
-      fs.writeFile("README.md", readmeContents,{ encoding: "utf8", flag: "w", mode: 0o666, filetype: "markdown" }, (err) => {
-        if (err) {
-          console.error(err);
-        } else {
-          console.log("README.md created successfully!");
-        }
-      });
+      writeToFile(readmeContents);
       console.log("Generated README data:", readmeData);
     })
-    
     .catch((error) => {
       console.log("There was an error:", error);
     });
