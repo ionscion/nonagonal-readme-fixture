@@ -1,5 +1,9 @@
 const inquirer = require("inquirer");
 const fs = require("fs");
+const generateMarkdown = require("./utils/generateMarkdown");
+const renderLicenseBadge = generateMarkdown.renderLicenseBadge;
+const renderLicenseSection = generateMarkdown.renderLicenseSection;
+
 // WHEN I enter my project title
 // THEN this is displayed as the title of the README
 // WHEN I enter a description, installation instructions, usage information, contribution guidelines, and test instructions
@@ -104,12 +108,17 @@ function init() {
           email: answers.email,
         },
       };
+      const licenseBadge = generateMarkdown.renderLicenseBadge(readmeData.license);
+      const licenseSection = generateMarkdown.renderLicenseSection(readmeData.license);
       const readmeContents = `
       # ${readmeData.title}
       
       ## Description
       
       ${readmeData.description}
+
+      ##
+      ${licenseBadge}
 
       ## Table of Contents
       - [Installation](#installation)
@@ -138,6 +147,8 @@ function init() {
       ## License
       
       ${readmeData.license}
+      
+      ${licenseSection}
       
       ## Questions
       
