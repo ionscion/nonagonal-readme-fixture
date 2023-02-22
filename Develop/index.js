@@ -148,7 +148,7 @@ function init() {
       
       ## License
       
-      ${readmeData.license}
+      ${readmeData.license}  
 
       ${licenseSection}
       
