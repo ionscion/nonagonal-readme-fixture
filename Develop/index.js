@@ -3,6 +3,8 @@ const fs = require("fs");
 const generateMarkdown = require("./utils/generateMarkdown");
 const renderLicenseBadge = generateMarkdown.renderLicenseBadge;
 const renderLicenseSection = generateMarkdown.renderLicenseSection;
+const dayjs = require('dayjs');
+const currentYear = dayjs().year();
 
 // WHEN I enter my project title
 // THEN this is displayed as the title of the README
@@ -109,7 +111,7 @@ function init() {
         },
       };
       const licenseBadge = generateMarkdown.renderLicenseBadge(readmeData.license);
-      const licenseSection = generateMarkdown.renderLicenseSection(readmeData.license);
+      const licenseSection = generateMarkdown.renderLicenseSection(readmeData.license, readmeData.author.username,currentYear);
       const readmeContents = `
       # ${readmeData.title}
       
@@ -147,7 +149,7 @@ function init() {
       ## License
       
       ${readmeData.license}
-      
+
       ${licenseSection}
       
       ## Questions
