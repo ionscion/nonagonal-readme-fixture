@@ -18,7 +18,7 @@ function renderLicenseBadgeLink(license) {
 
 // This function returns the license section of README
 // If there is no license, return an empty string
-function renderLicenseSection(license,username,year) {
+function renderLicenseSection(license, username, year) {
   switch (license) {
     case "MIT":
       return `Copyright ${year} ${username}
@@ -27,7 +27,8 @@ function renderLicenseSection(license,username,year) {
       
       The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
       
-      THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.`;
+      THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+      Please visit https://opensource.org/licenses/MIT for more information`;
     case "Apache":
       return `Copyright ${year} ${username}
 
@@ -87,15 +88,74 @@ function renderLicenseSection(license,username,year) {
       return "";
   }
 }
-//can i put just the template literal here and call it in other page?
-// TODO: Create a function to generate markdown for README
-// function generateMarkdown(data) {
-//   return `# ${data.title}
 
-// `;
-// }
+// This function generates markdown for README
+function markdownGen(
+  title,
+  description,
+  installation,
+  usage,
+  contribution,
+  test,
+  license,
+  name,
+  username,
+  email,
+  currentYear
+) {
+  const licenseBadge = renderLicenseBadgeLink(license);
+  const licenseSection = renderLicenseSection(
+    license,
+    username,
+    currentYear
+  );
+  return `
+# ${title}
+
+## Description
+
+${description}
+
+##
+${licenseBadge}
+
+## Table of Contents
+- [Installation](#installation)
+- [Usage](#usage)
+- [Contributing](#contributing)
+- [Tests](#tests)
+- [License](#license)
+- [Questions](#questions)
+
+## Installation
+
+${installation}
+
+## Usage
+
+${usage}
+
+## Contributing
+
+${contribution}
+
+## Tests
+
+${test}
+
+## License
+
+${license}  
+
+${licenseSection}
+
+## Questions
+
+For questions, please contact ${name} at ${email} or visit their [GitHub profile](https://github.com/${username}).
+
+`.replace(/^\s+/gm, "");
+}
 
 module.exports = {
-  renderLicenseBadgeLink: renderLicenseBadgeLink,
-  renderLicenseSection: renderLicenseSection,
+  markdownGen: markdownGen,
 };

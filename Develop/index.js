@@ -1,24 +1,28 @@
 const inquirer = require("inquirer");
 const fs = require("fs");
 const generateMarkdown = require("./utils/generateMarkdown");
-const renderLicenseBadgeLink = generateMarkdown.renderLicenseBadgeLink;
-const renderLicenseSection = generateMarkdown.renderLicenseSection;
-const dayjs = require('dayjs');
+const markdownGen = generateMarkdown.markdownGen;
+const dayjs = require("dayjs");
 const currentYear = dayjs().year();
 
 // Function writes the README file
 function writeToFile(data) {
-  fs.writeFile("README.md", data,{ encoding: "utf8", flag: "w", mode: 0o666, filetype: "markdown" }, (err) => {
-    if (err) {
-      console.error(err);
-    } else {
-      console.log("README.md created successfully!");
+  fs.writeFile(
+    "README.md",
+    data,
+    { encoding: "utf8", flag: "w", mode: 0o666, filetype: "markdown" },
+    (err) => {
+      if (err) {
+        console.error(err);
+      } else {
+        console.log("README.md created successfully!");
+      }
     }
-  });
+  );
 }
 
 // TODO: Create a function to initialize app
-function generateMd() {
+function inquirerStart() {
   inquirer
     .prompt([
       {
@@ -74,54 +78,32 @@ function generateMd() {
       },
     ])
     .then((answers) => {
-      const {title, description, installation, usage, contribution, test, license, name, username, email} = answers;
-      const licenseBadge = generateMarkdown.renderLicenseBadgeLink(license);
-      const licenseSection = generateMarkdown.renderLicenseSection(license, username, currentYear);
-      const readmeContents = `
-      # ${title}
-      
-      ## Description
-      
-      ${description}
-
-      ##
-      ${licenseBadge}
-
-      ## Table of Contents
-      - [Installation](#installation)
-      - [Usage](#usage)
-      - [Contributing](#contributing)
-      - [Tests](#tests)
-      - [License](#license)
-      - [Questions](#questions)
-      
-      ## Installation
-      
-      ${installation}
-      
-      ## Usage
-      
-      ${usage}
-      
-      ## Contributing
-      
-      ${contribution}
-      
-      ## Tests
-      
-      ${test}
-      
-      ## License
-      
-      ${license}  
-
-      ${licenseSection}
-      
-      ## Questions
-      
-      For questions, please contact ${name} at ${email} or visit their [GitHub profile](https://github.com/${username}).
-      
-      `.replace(/^\s+/gm, '');
+      const {
+        title,
+        description,
+        installation,
+        usage,
+        contribution,
+        test,
+        license,
+        name,
+        username,
+        email,
+      } = answers;
+    
+      const readmeContents = generateMarkdown.markdownGen(
+        title,
+        description,
+        installation,
+        usage,
+        contribution,
+        test,
+        license,
+        name,
+        username,
+        email,
+        currentYear
+      );
       writeToFile(readmeContents);
       console.log("Generated README data:", answers);
     })
@@ -131,4 +113,4 @@ function generateMd() {
 }
 
 // Function call to initialize app
-generateMd();
+inquirerStart();
