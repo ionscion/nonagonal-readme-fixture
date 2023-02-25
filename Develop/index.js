@@ -75,28 +75,15 @@ function init() {
     ])
     //need to make this destructured 
     .then((answers) => {
-      const readmeData = {
-        title: answers.title,
-        description: answers.description,
-        installation: answers.installation,
-        usage: answers.usage,
-        contribution: answers.contribution,
-        test: answers.test,
-        license: answers.license,
-        author: {
-          name: answers.name,
-          username: answers.username,
-          email: answers.email,
-        },
-      };
-      const licenseBadge = generateMarkdown.renderLicenseBadge(readmeData.license);
-      const licenseSection = generateMarkdown.renderLicenseSection(readmeData.license, readmeData.author.username,currentYear);
+      const {title, description, installation, usage, contribution, test, license, name, username, email} = answers;
+      const licenseBadge = generateMarkdown.renderLicenseBadge(license);
+      const licenseSection = generateMarkdown.renderLicenseSection(license, username, currentYear);
       const readmeContents = `
-      # ${readmeData.title}
+      # ${title}
       
       ## Description
       
-      ${readmeData.description}
+      ${description}
 
       ##
       ${licenseBadge}
@@ -111,33 +98,33 @@ function init() {
       
       ## Installation
       
-      ${readmeData.installation}
+      ${installation}
       
       ## Usage
       
-      ${readmeData.usage}
+      ${usage}
       
       ## Contributing
       
-      ${readmeData.contribution}
+      ${contribution}
       
       ## Tests
       
-      ${readmeData.test}
+      ${test}
       
       ## License
       
-      ${readmeData.license}  
+      ${license}  
 
       ${licenseSection}
       
       ## Questions
       
-      For questions, please contact ${readmeData.author.name} at ${readmeData.author.email} or visit their [GitHub profile](https://github.com/${readmeData.author.username}).
+      For questions, please contact ${name} at ${email} or visit their [GitHub profile](https://github.com/${username}).
       
       `.replace(/^\s+/gm, '');
       writeToFile(readmeContents);
-      console.log("Generated README data:", readmeData);
+      console.log("Generated README data:", answers);
     })
     .catch((error) => {
       console.log("There was an error:", error);
