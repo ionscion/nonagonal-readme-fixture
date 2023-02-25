@@ -1,7 +1,7 @@
 const inquirer = require("inquirer");
 const fs = require("fs");
 const generateMarkdown = require("./utils/generateMarkdown");
-const renderLicenseBadge = generateMarkdown.renderLicenseBadge;
+const renderLicenseBadgeLink = generateMarkdown.renderLicenseBadgeLink;
 const renderLicenseSection = generateMarkdown.renderLicenseSection;
 const dayjs = require('dayjs');
 const currentYear = dayjs().year();
@@ -18,7 +18,7 @@ function writeToFile(data) {
 }
 
 // TODO: Create a function to initialize app
-function init() {
+function generateMd() {
   inquirer
     .prompt([
       {
@@ -73,10 +73,9 @@ function init() {
         message: "What is your email address?",
       },
     ])
-    //need to make this destructured 
     .then((answers) => {
       const {title, description, installation, usage, contribution, test, license, name, username, email} = answers;
-      const licenseBadge = generateMarkdown.renderLicenseBadge(license);
+      const licenseBadge = generateMarkdown.renderLicenseBadgeLink(license);
       const licenseSection = generateMarkdown.renderLicenseSection(license, username, currentYear);
       const readmeContents = `
       # ${title}
@@ -132,4 +131,4 @@ function init() {
 }
 
 // Function call to initialize app
-init();
+generateMd();
