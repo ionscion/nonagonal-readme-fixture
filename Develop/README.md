@@ -1,6 +1,6 @@
-# readme tester
+# Readme for homework 9!
 ## Description
-readme test
+This is a readme generator for future use
 ##
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 ## Table of Contents
@@ -13,11 +13,11 @@ readme test
 ## Installation
 npm i
 ## Usage
-none
+anyone may use this app
 ## Contributing
-none
+anyone may contribute
 ## Tests
-npm test
+no test cases defined
 ## License
 MIT  
 Copyright 2023 ionscion
@@ -26,4 +26,4 @@ The above copyright notice and this permission notice shall be included in all c
 THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 Please visit https://opensource.org/licenses/MIT for more information
 ## Questions
-For questions, please contact ionscion at bensboto@gmail.com or visit their [GitHub profile](https://github.com/ionscion).
+For questions, please contact Ben at bensboto@gmail.com or visit their [GitHub profile](https://github.com/ionscion).

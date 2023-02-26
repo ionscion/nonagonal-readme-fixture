@@ -51,24 +51,9 @@ Note, in this image, the newly generated Readme file is the one directly underne
 
 The following link contains the walkthrough video in it's entirety:
 
-* A walkthrough video that demonstrates the functionality of the README generator must be submitted, and a link to the video should be included in your README file.
-
-* The walkthrough video must demonstrate how a user would invoke the application from the command line.
-
-* The walkthrough video must demonstrate how a user would enter responses to all of the prompts in the application.
-
-* The walkthrough video must demonstrate a generated README that matches the user input and has a functioning table of contents.
+https://drive.google.com/file/d/18I8SIBjGswDNGMf2AluyNGO8NycIFO2i/view
 
 
-## Review
-
-You are required to submit the following for review:
-
-* A walkthrough video demonstrating the functionality of the application.
-
-* A sample README.md file for a project repository generated using your application
-
-* The URL of the GitHub repository, with a unique name and a README describing the project
 
 ---
 
